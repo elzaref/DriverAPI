@@ -69,6 +69,10 @@ namespace DriverAPI.Controllers
             try
             {
                 var response = _driverRepository.GetDriverByID(id);
+                if (response == null)
+                {
+                    return Ok(new ApiResponse<int>() { Success = false, Data = id, Message = "No Driver with this Id" });
+                }
                 return Ok(new ApiResponse<Driver>() { Success = true, Data = response });
             }
             catch (System.Exception ex)
